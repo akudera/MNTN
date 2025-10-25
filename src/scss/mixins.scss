@@ -1,0 +1,23 @@
+@mixin fluid-text($min, $max) {
+  font-size: clamp(#{$min}px, #{calc($max * 100 / 1200)}vw, #{$max}px);
+}
+
+@mixin button-normalize {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    &:active {
+      @content;
+    }
+  }
+}

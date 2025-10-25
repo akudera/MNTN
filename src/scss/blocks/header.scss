@@ -1,0 +1,183 @@
+@use "../mixins.scss" as *;
+
+.header {
+  --header-padding: 20px;
+
+  position: absolute;
+  justify-self: center;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 30px;
+  max-width: 1920px;
+  width: 100%;
+  padding-inline: 80px;
+  transform: translateY(64px);
+  transition: backdrop-filter var(--transition-duration);
+
+  &.fixed {
+    position: fixed;
+    transform: translateY(0px);
+    padding-block: var(--header-padding);
+    backdrop-filter: blur(12px);
+  }
+
+  &__logo {
+    @include fluid-text(26, 32);
+    font-family: "ChronicleDisplay", serif;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color var(--transition-duration);
+
+    @include hover {
+      color: var(--color-text-accent);
+    }
+  }
+
+  &__menu {
+    display: contents;
+    width: 100vw;
+    max-width: none;
+    max-height: none;
+    height: 100dvh;
+    background-color: transparent;
+    backdrop-filter: blur(12px) brightness(0.7);
+    border: none;
+    margin: 0;
+    padding-block: 40px;
+    z-index: 100;
+
+    &-button {
+      position: relative;
+      display: none;
+      @include button-normalize;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      aspect-ratio: 1;
+      padding-block: 5px;
+      z-index: 200;
+
+      @include hover {
+        & span {
+          background-color: var(--color-text-accent);
+        }
+      }
+
+      & span {
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-text);
+        transition: background-color var(--transition-duration);
+      }
+
+      &.close {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+
+        & {
+          & span:nth-child(1) {
+            transform: translate(6.5px, 5px);
+            rotate: 45deg;
+          }
+
+          & span:nth-child(2) {
+            width: 0;
+          }
+
+          & span:nth-child(3) {
+            transform: translate(7.5px, -6px);
+            rotate: -45deg;
+          }
+        }
+      }
+    }
+  }
+
+  &__nav {
+    max-width: 285px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    column-gap: 15px;
+  }
+
+  &__link {
+    @include fluid-text(16, 18);
+    position: relative;
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--color-text);
+      transition: width var(--transition-duration);
+    }
+
+    @include hover {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__account {
+    @include button-normalize;
+    @include fluid-text(14, 17);
+    color: var(--color-text);
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    transition: fill var(--transition-duration), color var(--transition-duration);
+
+    @include hover {
+      color: var(--color-text-accent);
+
+      & svg {
+        fill: var(--color-text-accent);
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .header {
+    padding-inline: 40px;
+
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      row-gap: 40px;
+      justify-content: space-between;
+      align-items: center;
+      &:not([open]) {
+        display: none;
+      }
+
+      &-button {
+        display: flex;
+      }
+    }
+
+    &__nav {
+      margin-block: auto;
+      flex-direction: column;
+      flex-grow: 0;
+      row-gap: 30px;
+    }
+  }
+}
