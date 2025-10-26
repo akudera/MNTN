@@ -1,4 +1,8 @@
+@use "../mixins.scss" as *;
+
 .hero {
+  position: relative;
+
   &__background {
     background-color: var(--color-root);
     width: 100%;
@@ -36,6 +40,7 @@
 
   &__image {
     position: absolute;
+    user-select: none;
 
     &:nth-child(1) {
       top: -10%;
@@ -50,6 +55,70 @@
     &:last-child {
       top: 45%;
       z-index: 1;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+    display: flex;
+    align-items: center;
+    height: 100lvh;
+    max-height: 850px;
+    max-width: 950px;
+    width: 80%;
+    color: var(--color-text);
+  }
+
+  &__title {
+    @include fluid-text(44, 88);
+    font-family: "ChronicleDisplay", serif;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    @include fluid-text(14, 18);
+    font-family: "Gilroy", sans-serif;
+    font-weight: 800;
+    color: var(--color-text-accent);
+    display: inline-flex;
+    align-items: center;
+    column-gap: 1.78em;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 4em;
+      background-color: var(--color-text-accent);
+      height: 0.11em;
+    }
+  }
+
+  &__anchor {
+    @include fluid-text(14, 18);
+    color: var(--color-text);
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.89em;
+    transition: color var(--transition-duration);
+
+    & svg {
+      transition: transform var(--transition-duration);
+    }
+
+    @include hover {
+      color: var(--color-text-accent);
+
+      & svg {
+        transform: translateY(12%);
+      }
     }
   }
 }

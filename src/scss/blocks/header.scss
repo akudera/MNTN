@@ -23,6 +23,7 @@
   padding-inline: 80px;
   transform: translateY(64px);
   transition: backdrop-filter var(--transition-duration);
+  z-index: 1000;
 
   &.fixed {
     position: fixed;
@@ -40,7 +41,7 @@
     transition: color var(--transition-duration);
 
     @include hover {
-      color: var(--color-text-accent);
+      color: var(--color-text-hover);
     }
   }
 
@@ -72,7 +73,7 @@
 
       @include hover {
         & span {
-          background-color: var(--color-text-accent);
+          background-color: var(--color-text-hover);
         }
       }
 
@@ -155,10 +156,10 @@
     transition: fill var(--transition-duration), color var(--transition-duration);
 
     @include hover {
-      color: var(--color-text-accent);
+      color: var(--color-text-hover);
 
       & svg {
-        fill: var(--color-text-accent);
+        fill: var(--color-text-hover);
       }
     }
   }
