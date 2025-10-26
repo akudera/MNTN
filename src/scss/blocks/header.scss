@@ -59,6 +59,7 @@
       aspect-ratio: 1;
       padding-block: 5px;
       z-index: 200;
+      -webkit-tap-highlight-color: transparent;
 
       @include hover {
         & span {
