@@ -5,6 +5,10 @@ export class Menu {
   closeMenuButton: HTMLButtonElement | null;
   menuDialog: HTMLDialogElement | null;
 
+  duration: number;
+  isOpen: boolean;
+  isAnimating: boolean;
+
   selectors = {
     openMenuButton: "open-menu-button",
     closeMenuButton: "close-menu-button",
@@ -23,6 +27,13 @@ export class Menu {
       this.selectors.closeMenuButton
     ) as HTMLButtonElement;
     this.menuDialog = document.getElementById(this.selectors.menu) as HTMLDialogElement;
+    this.isOpen = false;
+    this.isAnimating = false;
+
+    this.duration =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--transition-duration")
+      ) * 1000;
 
     this.bindEvents();
   }
@@ -40,30 +51,59 @@ export class Menu {
     window.addEventListener(
       "resize",
       debounce(() => {
-        this.onResize(), 100;
-      })
+        this.onResize();
+      }, 100)
     );
   }
 
   openMenu() {
+    if (this.isOpen || this.isAnimating) return;
+
+    this.isAnimating = true;
+    this.isOpen = true;
     this.menuDialog?.showModal();
+
+    this.menuDialog?.addEventListener(
+      "transitionend",
+      () => {
+        this.isAnimating = false;
+      },
+      { once: true }
+    );
+
     document.documentElement.classList.add(this.stateClasses.isLocked);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.menuDialog?.classList.add("fade-in");
+      });
+    });
   }
 
   closeMenu() {
-    this.menuDialog?.close();
-    document.documentElement.classList.remove(this.stateClasses.isLocked);
+    if (!this.isOpen || this.isAnimating) return;
+
+    this.isOpen = false;
+    this.isAnimating = true;
+    this.menuDialog?.classList.add("fade-out");
+    this.menuDialog?.classList.remove("fade-in");
+
+    setTimeout(() => {
+      this.menuDialog?.close();
+      document.documentElement.classList.remove(this.stateClasses.isLocked);
+      this.menuDialog?.classList.remove("fade-out");
+      this.isAnimating = false;
+    }, this.duration);
   }
 
   keyboardHandler(event: KeyboardEvent) {
-    if (event.key === "Escape") {
+    if (this.isOpen && event.key === "Escape") {
       event.preventDefault();
       this.closeMenu();
     }
   }
 
   onResize() {
-    if (innerWidth >= 620) {
+    if (this.isOpen && innerWidth >= 620) {
       this.closeMenu();
     }
   }
