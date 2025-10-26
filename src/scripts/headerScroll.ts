@@ -1,6 +1,6 @@
 export class HeaderScroll {
   header: HTMLElement | null;
-  headerHeight = 0;
+  HeaderTop = 0;
 
   isTicking: boolean = false;
 
@@ -16,7 +16,7 @@ export class HeaderScroll {
     this.header = document.getElementById(this.selectors.header) as HTMLElement;
 
     if (this.header) {
-      this.headerHeight = this.header.getBoundingClientRect().top;
+      this.HeaderTop = this.header.getBoundingClientRect().top;
     }
 
     this.bindEvents();
@@ -40,7 +40,7 @@ export class HeaderScroll {
       getComputedStyle(this.header).getPropertyValue("--header-padding")
     );
 
-    if (window.scrollY > this.headerHeight - headerPadding) {
+    if (window.scrollY > this.HeaderTop - headerPadding) {
       this.header.classList.add(this.stateClasses.fixed);
     } else {
       this.header.classList.remove(this.stateClasses.fixed);
