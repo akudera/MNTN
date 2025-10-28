@@ -1,3 +1,5 @@
+import "@/scss/blocks/header.scss";
+
 export class HeaderScroll {
   header: HTMLElement | null;
   HeaderTop = 0;

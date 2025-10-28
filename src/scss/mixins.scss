@@ -21,3 +21,10 @@
     }
   }
 }
+
+@mixin top-fixing($position) {
+  position: absolute;
+  top: min(330px, 39%);
+  #{$position}: 4%;
+  pointer-events: auto;
+}

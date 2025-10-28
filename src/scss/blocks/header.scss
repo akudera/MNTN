@@ -90,16 +90,16 @@
         right: 40px;
 
         & {
-          & span:nth-child(1) {
+          & span:nth-child(2) {
             transform: translate(6.5px, 5px);
             rotate: 45deg;
           }
 
-          & span:nth-child(2) {
+          & span:nth-child(3) {
             width: 0;
           }
 
-          & span:nth-child(3) {
+          & span:nth-child(4) {
             transform: translate(7.5px, -6px);
             rotate: -45deg;
           }
