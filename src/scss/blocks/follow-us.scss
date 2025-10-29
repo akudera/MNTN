@@ -1,0 +1,33 @@
+@use "../mixins.scss" as *;
+
+.follow-us {
+  @include fluid-text(16, 18);
+  @include top-fixing(left);
+  $gap: 24px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 700;
+  transform-origin: 0 0;
+  display: flex;
+  align-items: center;
+  column-gap: $gap;
+  transform: rotate(90deg);
+  color: var(--color-text);
+
+  &__socials {
+    display: flex;
+    column-gap: $gap;
+
+    & a.follow-us__link {
+      color: inherit;
+      width: 1.11em;
+      height: 1.11em;
+      rotate: -90deg;
+      transition: color var(--transition-duration), scale var(--transition-duration);
+
+      @include hover {
+        color: var(--color-text-accent);
+        scale: 1.13;
+      }
+    }
+  }
+}

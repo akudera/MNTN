@@ -1,4 +1,8 @@
+@use "../mixins.scss" as *;
+
 .hero {
+  position: relative;
+
   &__background {
     background-color: var(--color-root);
     width: 100%;
@@ -7,7 +11,7 @@
     justify-content: center;
     overflow: hidden;
     height: 140lvh;
-    max-height: 900px;
+    max-height: 1400px;
     position: relative;
     z-index: -100;
 
@@ -36,6 +40,7 @@
 
   &__image {
     position: absolute;
+    user-select: none;
 
     &:nth-child(1) {
       top: -10%;
@@ -50,6 +55,45 @@
     &:last-child {
       top: 45%;
       z-index: 1;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+    display: flex;
+    align-items: center;
+    height: 100lvh;
+    max-height: 850px;
+    min-height: 550px;
+    max-width: 950px;
+    width: 80%;
+    color: var(--color-text);
+  }
+
+  &__anchor {
+    @include fluid-text(14, 18);
+    color: var(--color-text);
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.89em;
+    transition: color var(--transition-duration);
+
+    & svg {
+      transition: transform var(--transition-duration);
+    }
+
+    @include hover {
+      color: var(--color-text-accent);
+
+      & svg {
+        transform: translateY(12%);
+      }
     }
   }
 }

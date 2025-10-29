@@ -1,3 +1,60 @@
+@use "./mixins.scss" as *;
+
 .is-locked {
   overflow: hidden;
+}
+
+.fixed-element-wrapper {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1920px;
+  height: 100%;
+  z-index: 999;
+  pointer-events: none;
+}
+
+@media (max-width: 620px), (max-height: 470px) {
+  .fixed-element-wrapper {
+    display: none;
+  }
+}
+
+.subtitle {
+  @include fluid-text(14, 18);
+  font-family: "Gilroy", sans-serif;
+  font-weight: 800;
+  color: var(--color-text-accent);
+  display: inline-flex;
+  align-items: center;
+  column-gap: 1.78em;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 4em;
+    background-color: var(--color-text-accent);
+    height: 0.11em;
+  }
+}
+
+.title {
+  @include fluid-text(44, 88);
+  font-family: "ChronicleDisplay", serif;
+  font-weight: 600;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
 }

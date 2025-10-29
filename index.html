@@ -8,6 +8,51 @@
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
+    <div class="fixed-element-wrapper">
+      <aside class="follow-us">
+        <span class="follow-us__title">Follow us</span>
+        <nav class="follow-us__socials">
+          <a href="/" target="_blank" class="follow-us__link" aria-label="instagram">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M5.8 0H14.2C17.4032 0 20 2.59675 20 5.8V14.2C20 17.4033 17.4032 20 14.2 20H5.8C2.59675 20 0 17.4033 0 14.2V5.8C0 2.59675 2.59675 0 5.8 0ZM5.6 1.99998C3.61177 1.99998 2 3.61176 2 5.59998V14.4C2 16.3882 3.61177 18 5.6 18H14.4C16.3882 18 18 16.3882 18 14.4V5.59998C18 3.61176 16.3882 1.99998 14.4 1.99998H5.6ZM15.25 3.49998C15.9404 3.49998 16.5 4.05963 16.5 4.74998C16.5 5.44034 15.9404 5.99998 15.25 5.99998C14.5596 5.99998 14 5.44034 14 4.74998C14 4.05963 14.5596 3.49998 15.25 3.49998ZM10 4.99998C12.7614 4.99998 15 7.23856 15 9.99998C15 12.7614 12.7614 15 10 15C7.23857 15 5 12.7614 5 9.99998C5 7.23856 7.23857 4.99998 10 4.99998ZM10 6.99998C8.3431 6.99998 7 8.34318 7 9.99998C7 11.6569 8.3431 13 10 13C11.6569 13 13 11.6569 13 9.99998C13 8.34318 11.6569 6.99998 10 6.99998Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+          <a href="/" target="_blank" class="follow-us__link" aria-label="twitter">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 1024 1024"
+              fill="currentColor"
+              fill-rule="evenodd"
+            >
+              <path
+                d="M818 800 498.11 333.745l.546.437L787.084 0h-96.385L455.738 272 269.15 0H16.367l298.648 435.31-.036-.037L0 800h96.385l261.222-302.618L565.217 800zM230.96 72.727l448.827 654.546h-76.38L154.217 72.727z"
+                transform="translate(103 112)"
+              />
+            </svg>
+          </a>
+        </nav>
+      </aside>
+      <div class="scroll-indicator">
+        <nav class="scroll-indicator__nav" id="nav-link">
+          <a href="#" class="scroll-indicator__link" data-js-indicator-link>Start</a>
+          <a href="#" class="scroll-indicator__link" data-js-indicator-link>01</a>
+          <a href="#" class="scroll-indicator__link" data-js-indicator-link>02</a>
+          <a href="#" class="scroll-indicator__link" data-js-indicator-link>03</a>
+        </nav>
+        <div class="scroll-indicator__highlight" id="scroll-indicator"></div>
+      </div>
+    </div>
     <header class="header" id="header">
       <a href="/" class="header__logo">MNTN</a>
       <dialog class="header__menu" id="menu">
@@ -18,6 +63,7 @@
           aria-label="Закрыть меню"
           title="Закрыть меню"
         >
+          <span class="visually-hidden">Закрыть меню</span>
           <span></span>
           <span></span>
           <span></span>
@@ -62,6 +108,7 @@
         aria-label="Открыть меню"
         title="Открыть меню"
       >
+        <span class="visually-hidden">Открыть меню</span>
         <span></span>
         <span></span>
         <span></span>
@@ -73,6 +120,27 @@
           <img src="/images/HG.png" alt="" class="hero__image" data-scroll-speed="0.5" />
           <img src="/images/MG.png" alt="" class="hero__image" data-scroll-speed="0.6" />
           <img src="/images/VG.png" alt="" class="hero__image" data-scroll-speed="0.7" />
+        </div>
+        <div class="hero__content">
+          <header class="hero__header">
+            <span class="hero__subtitle subtitle">A Hiking guide</span>
+            <h1 class="hero__title title">Be Prepared For The Mountains And Beyond!</h1>
+            <a class="hero__anchor" href="#">
+              scroll down
+              <svg
+                width="16"
+                height="24"
+                viewBox="0 0 16 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 16L14.59 14.59L9 20.17V0H7V20.17L1.42 14.58L0 16L8 24L16 16Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+          </header>
         </div>
       </section>
     </main>
