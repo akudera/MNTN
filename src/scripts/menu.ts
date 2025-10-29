@@ -17,6 +17,8 @@ export class Menu {
 
   stateClasses = {
     isLocked: "is-locked",
+    fadeIn: "fade-in",
+    fadeOut: "fade-out",
   };
 
   constructor() {
@@ -74,7 +76,7 @@ export class Menu {
     document.documentElement.classList.add(this.stateClasses.isLocked);
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        this.menuDialog?.classList.add("fade-in");
+        this.menuDialog?.classList.add(this.stateClasses.fadeIn);
       });
     });
   }
@@ -84,13 +86,13 @@ export class Menu {
 
     this.isOpen = false;
     this.isAnimating = true;
-    this.menuDialog?.classList.add("fade-out");
-    this.menuDialog?.classList.remove("fade-in");
+    this.menuDialog?.classList.add(this.stateClasses.fadeOut);
+    this.menuDialog?.classList.remove(this.stateClasses.fadeIn);
 
+    document.documentElement.classList.remove(this.stateClasses.isLocked);
     setTimeout(() => {
       this.menuDialog?.close();
-      document.documentElement.classList.remove(this.stateClasses.isLocked);
-      this.menuDialog?.classList.remove("fade-out");
+      this.menuDialog?.classList.remove(this.stateClasses.fadeOut);
       this.isAnimating = false;
     }, this.duration);
   }
