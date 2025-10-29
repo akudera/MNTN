@@ -59,6 +59,10 @@
     z-index: 100;
     transition: opacity var(--transition-duration);
 
+    &::backdrop {
+      display: none;
+    }
+
     &-button {
       position: relative;
       display: none;
