@@ -117,9 +117,51 @@
     <main class="main">
       <section class="hero" id="hero">
         <div class="hero__background">
-          <img src="/images/HG.png" alt="" class="hero__image" data-scroll-speed="0.5" />
-          <img src="/images/MG.png" alt="" class="hero__image" data-scroll-speed="0.6" />
-          <img src="/images/VG.png" alt="" class="hero__image" data-scroll-speed="0.7" />
+          <picture class="hero__image" data-scroll-speed="0.5">
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/avif/HG.avif"
+              type="image/avif"
+            />
+            <source srcset="images/desktop/avif/HG.avif" type="image/avif" />
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/webp/HG.webp"
+              type="image/webp"
+            />
+            <source srcset="images/desktop/webp/HG.webp" type="image/webp" />
+            <img src="images/desktop/HG.png" alt="" />
+          </picture>
+          <picture class="hero__image" data-scroll-speed="0.6">
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/avif/MG.avif"
+              type="image/avif"
+            />
+            <source srcset="images/desktop/avif/MG.avif" type="image/avif" />
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/webp/MG.webp"
+              type="image/webp"
+            />
+            <source srcset="images/desktop/webp/MG.webp" type="image/webp" />
+            <img src="/images/desktop/MG.png" alt="" />
+          </picture>
+          <picture class="hero__image" data-scroll-speed="0.7">
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/avif/VG.avif"
+              type="image/avif"
+            />
+            <source srcset="images/desktop/avif/VG.avif" type="image/avif" />
+            <source
+              media="(max-width: 960px)"
+              srcset="images/mobile/webp/VG.webp"
+              type="image/webp"
+            />
+            <source srcset="images/desktop/webp/VG.webp" type="image/webp" />
+            <img src="/images/desktop/VG.png" alt="" />
+          </picture>
         </div>
         <div class="hero__content">
           <header class="hero__header">
