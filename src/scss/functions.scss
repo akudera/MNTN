@@ -1,0 +1,3 @@
+@function u-clamp($min, $max-width, $max) {
+  @return clamp(#{$min}px, #{calc($max * 100 / $max-width)}vw, #{$max}px);
+}

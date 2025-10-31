@@ -1,0 +1,30 @@
+.hiker-level {
+  margin-top: -200px;
+
+  &__content {
+    max-width: 43.9%;
+  }
+}
+
+@media (max-width: 1160px) {
+  .hiker-level {
+    flex-direction: column-reverse;
+    padding-inline: 100px;
+
+    &__content {
+      max-width: 566px;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .hiker-level {
+    padding-inline: 80px;
+  }
+}
+
+@media (max-width: 465px) {
+  .hiker-level {
+    padding-inline: 50px;
+  }
+}

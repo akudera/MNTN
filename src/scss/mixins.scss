@@ -1,5 +1,7 @@
+@use "./functions.scss" as *;
+
 @mixin fluid-text($min, $max) {
-  font-size: clamp(#{$min}px, #{calc($max * 100 / 1200)}vw, #{$max}px);
+  font-size: u-clamp($min, 1200, $max);
 }
 
 @mixin button-normalize {
