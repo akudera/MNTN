@@ -1,0 +1,26 @@
+@media (max-width: 1160px) {
+  .container {
+    flex-direction: column;
+    padding-inline: 100px;
+  }
+
+  .content {
+    max-width: 73.9%;
+  }
+}
+
+@media (max-width: 620px) {
+  .container {
+    padding-inline: 80px;
+  }
+}
+
+@media (max-width: 465px) {
+  .container {
+    padding-inline: 50px;
+
+    &:not(:last-child) {
+      margin-bottom: 150px;
+    }
+  }
+}
