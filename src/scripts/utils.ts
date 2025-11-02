@@ -9,3 +9,8 @@ export function debounce<F extends (...args: any[]) => any>(callback: F, ms = 20
     }, ms);
   };
 }
+
+export const pageSizes = {
+  mobileWidth: 620,
+  mobileHeight: 470,
+} as const;

@@ -1,4 +1,4 @@
-import { debounce } from "./utils";
+import { debounce, pageSizes } from "./utils";
 
 export class Menu {
   openMenuButton: HTMLButtonElement | null;
@@ -13,13 +13,13 @@ export class Menu {
     openMenuButton: "open-menu-button",
     closeMenuButton: "close-menu-button",
     menu: "menu",
-  };
+  } as const;
 
   stateClasses = {
     isLocked: "is-locked",
     fadeIn: "fade-in",
     fadeOut: "fade-out",
-  };
+  } as const;
 
   constructor() {
     this.openMenuButton = document.getElementById(
@@ -105,7 +105,7 @@ export class Menu {
   }
 
   onResize() {
-    if (this.isOpen && innerWidth >= 620) {
+    if (this.isOpen && document.documentElement.clientWidth >= pageSizes.mobileWidth) {
       this.closeMenu();
     }
   }
