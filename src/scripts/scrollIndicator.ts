@@ -3,12 +3,13 @@ import { pageSizes } from "./utils";
 
 export class ScrollIndicator {
   scrollIndicator: HTMLElement | null;
-  indicatorLinks?: HTMLCollectionOf<HTMLElement>;
+  indicatorLinks: HTMLElement[];
   navigationList: HTMLElement | null;
 
-  firstSection: HTMLElement | null;
-  secondSection: HTMLElement | null;
-  thirdSection: HTMLElement | null;
+  sections: (HTMLElement | null)[];
+
+  observer: IntersectionObserver | null = null;
+  sectionToLink: Map<Element, HTMLElement> = new Map();
 
   animationTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -18,6 +19,7 @@ export class ScrollIndicator {
     indicator: "scroll-indicator",
     indicatorLink: "data-js-indicator-link",
     navigation: "nav-link",
+    hero: "hero",
     firstSection: "section-01",
     secondSection: "section-02",
     thirdSection: "section-03",
@@ -30,11 +32,15 @@ export class ScrollIndicator {
   constructor() {
     this.scrollIndicator = document.getElementById(this.selectors.indicator);
     this.navigationList = document.getElementById(this.selectors.navigation);
-    this.indicatorLinks = this.navigationList?.children as HTMLCollectionOf<HTMLElement>;
+    this.indicatorLinks =
+      Array.from(this.navigationList?.children as HTMLCollectionOf<HTMLElement>) || [];
 
-    this.firstSection = document.getElementById(this.selectors.firstSection);
-    this.secondSection = document.getElementById(this.selectors.secondSection);
-    this.thirdSection = document.getElementById(this.selectors.thirdSection);
+    this.sections = [
+      document.getElementById(this.selectors.hero),
+      document.getElementById(this.selectors.firstSection),
+      document.getElementById(this.selectors.secondSection),
+      document.getElementById(this.selectors.thirdSection),
+    ];
 
     this.isScrollWatchingBlocked = false;
 
@@ -45,7 +51,7 @@ export class ScrollIndicator {
     this.navigationList?.addEventListener("mouseover", (event) => {
       if (
         document.documentElement.clientWidth >= pageSizes.mobileWidth &&
-        window.matchMedia("(pointer: fine)").matches &&
+        matchMedia("(pointer: fine)").matches &&
         document.documentElement.clientHeight >= pageSizes.mobileHeight
       ) {
         this.onMouseOver(event);
@@ -54,7 +60,7 @@ export class ScrollIndicator {
     this.navigationList?.addEventListener("mouseout", (event) => {
       if (
         document.documentElement.clientWidth >= pageSizes.mobileWidth &&
-        window.matchMedia("(pointer: fine)").matches &&
+        matchMedia("(pointer: fine)").matches &&
         document.documentElement.clientHeight >= pageSizes.mobileHeight
       ) {
         this.onMouseOut(event);
@@ -63,25 +69,24 @@ export class ScrollIndicator {
     this.navigationList?.addEventListener("click", (event) => {
       this.onClick(event);
     });
-    document.addEventListener("scroll", () => {
-      if (
-        document.documentElement.clientWidth >= pageSizes.mobileWidth &&
-        document.documentElement.clientHeight >= pageSizes.mobileHeight
-      ) {
-        this.onScroll();
+    window.addEventListener("scroll", () => {
+      if (scrollY === 0) {
+        this.updateActiveElement(this.indicatorLinks[0]);
       }
     });
+    this.initObserver();
   }
 
-  updateActiveElement(navigationLink: HTMLElement) {
-    if (!this.navigationList) return;
+  updateActiveElement(activeLink: HTMLElement) {
+    if (!this.indicatorLinks) return;
 
-    Array.from(this.navigationList.children as Iterable<HTMLElement>).forEach((element) => {
-      if (element !== navigationLink) {
-        element.classList.remove(this.stateClasses.isActive);
-      }
+    this.indicatorLinks.forEach((link) => {
+      link.classList.toggle(this.stateClasses.isActive, link === activeLink);
     });
-    navigationLink.classList.add(this.stateClasses.isActive);
+    activeLink.classList.add(this.stateClasses.isActive);
+
+    const activeLinkIndex = this.indicatorLinks.indexOf(activeLink);
+    this.updateIndicatorPosition(activeLinkIndex);
   }
 
   onMouseOver(event: MouseEvent): void {
@@ -105,9 +110,9 @@ export class ScrollIndicator {
     const target = event.target as HTMLElement;
     if (target === this.navigationList || !this.navigationList.contains(target)) return;
 
-    const activeElement = this.navigationList.querySelector(
+    const activeElement = this.navigationList.querySelector<HTMLElement>(
       `.${this.stateClasses.isActive}`
-    ) as HTMLElement;
+    );
     let elementIndex: number;
     if (activeElement) {
       elementIndex = Array.from(this.indicatorLinks).indexOf(activeElement);
@@ -139,49 +144,41 @@ export class ScrollIndicator {
     }
   }
 
-  onScroll() {
-    if (
-      !this.firstSection ||
-      !this.secondSection ||
-      !this.thirdSection ||
-      !this.indicatorLinks ||
-      this.isScrollWatchingBlocked
-    )
-      return;
+  initObserver() {
+    this.sections.forEach((section, index) => {
+      const link = this.indicatorLinks[index];
+      if (section && link) {
+        this.sectionToLink.set(section, link);
+      }
+    });
 
-    const scrollCenter = scrollY + document.documentElement.clientHeight / 2;
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          this.isScrollWatchingBlocked ||
+          document.documentElement.clientWidth <= pageSizes.mobileWidth ||
+          document.documentElement.clientHeight <= pageSizes.mobileHeight
+        )
+          return;
 
-    const thirdSectionRect = this.thirdSection.getBoundingClientRect();
-    if (scrollCenter >= scrollY + thirdSectionRect.top + thirdSectionRect.height * 0.15) {
-      this.updateActiveElement(this.indicatorLinks[3]);
-      this.updateIndicatorPosition(3);
-      return;
-    }
-    const secondSectionRect = this.secondSection.getBoundingClientRect();
-    if (
-      scrollCenter >= scrollY + secondSectionRect.top + secondSectionRect.height * 0.15 &&
-      scrollCenter <=
-        scrollY + secondSectionRect.top + secondSectionRect.height - secondSectionRect.height * 0.15
-    ) {
-      this.updateActiveElement(this.indicatorLinks[2]);
-      this.updateIndicatorPosition(2);
-      return;
-    }
-    const firstSectionRect = this.firstSection.getBoundingClientRect();
-    if (
-      scrollY !== 0 &&
-      scrollCenter >= scrollY + firstSectionRect.top + firstSectionRect.height * 0.15 &&
-      scrollCenter <=
-        scrollY + firstSectionRect.top + firstSectionRect.height - firstSectionRect.height * 0.15
-    ) {
-      this.updateActiveElement(this.indicatorLinks[1]);
-      this.updateIndicatorPosition(1);
-      return;
-    }
-    if (scrollY === 0 || scrollCenter < scrollY + firstSectionRect.top) {
-      this.updateActiveElement(this.indicatorLinks[0]);
-      this.updateIndicatorPosition(0);
-    }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const link = this.sectionToLink.get(entry.target);
+            if (link) {
+              this.updateActiveElement(link);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "-50% 0px -50% 0px",
+        threshold: 0,
+      }
+    );
+
+    this.sections.forEach((section) => {
+      if (section) this.observer?.observe(section);
+    });
   }
 
   updateIndicatorPosition(elementIndex: number): void {
