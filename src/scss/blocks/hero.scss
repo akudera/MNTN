@@ -73,6 +73,10 @@
     color: var(--color-text);
   }
 
+  &__title {
+    @include fluid-text(44, 88);
+  }
+
   &__anchor {
     @include fluid-text(14, 18);
     color: var(--color-text);

@@ -43,7 +43,8 @@
 }
 
 .title {
-  @include fluid-text(44, 88);
+  @include fluid-text(28, 64);
+  color: var(--color-text);
   font-family: "ChronicleDisplay", serif;
   font-weight: 600;
 }
@@ -57,4 +58,96 @@
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
+}
+
+.container {
+  margin-inline: auto;
+  padding-inline: 160px;
+  max-width: calc(1462px + 160px * 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 84px 11.8%;
+  color: var(--color-text);
+
+  &:not(:last-child) {
+    margin-bottom: 200px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 27px;
+  max-width: 43.9%;
+}
+
+.description {
+  @include fluid-text(14, 18);
+  font-family: "Gilroy", sans-serif;
+  font-weight: 700;
+}
+
+.section-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 27px;
+  line-height: 1;
+
+  &::before {
+    @include fluid-text(120, 240);
+    content: attr(data-section-number);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    color: var(--color-text);
+    opacity: 0.1;
+  }
+}
+
+.link {
+  @include button-normalize;
+  @include fluid-text(14, 18);
+  text-decoration: none;
+  position: relative;
+  width: fit-content;
+  text-align: left;
+  display: inline-flex;
+  column-gap: 16px;
+  align-items: center;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 700;
+  color: var(--color-text-accent);
+  transition: color var(--transition-duration);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width var(--transition-duration);
+  }
+
+  & svg {
+    transition: transform var(--transition-duration);
+  }
+
+  @include hover {
+    &::after {
+      width: 100%;
+    }
+
+    & svg {
+      transform: translateX(15%);
+    }
+  }
 }
