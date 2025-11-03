@@ -20,7 +20,7 @@ export class ScrollIndicator {
     indicatorLink: "data-js-indicator-link",
     navigation: "nav-link",
     hero: "hero",
-    firstSection: "section-01",
+    firstSectionObserve: "section-01-observe",
     secondSection: "section-02",
     thirdSection: "section-03",
   } as const;
@@ -37,7 +37,7 @@ export class ScrollIndicator {
 
     this.sections = [
       document.getElementById(this.selectors.hero),
-      document.getElementById(this.selectors.firstSection),
+      document.getElementById(this.selectors.firstSectionObserve),
       document.getElementById(this.selectors.secondSection),
       document.getElementById(this.selectors.thirdSection),
     ];
@@ -50,8 +50,8 @@ export class ScrollIndicator {
   bindEvents(): void {
     this.navigationList?.addEventListener("mouseover", (event) => {
       if (
-        document.documentElement.clientWidth >= pageSizes.mobileWidth &&
         matchMedia("(pointer: fine)").matches &&
+        document.documentElement.clientWidth >= pageSizes.mobileWidth &&
         document.documentElement.clientHeight >= pageSizes.mobileHeight
       ) {
         this.onMouseOver(event);
@@ -59,8 +59,8 @@ export class ScrollIndicator {
     });
     this.navigationList?.addEventListener("mouseout", (event) => {
       if (
-        document.documentElement.clientWidth >= pageSizes.mobileWidth &&
         matchMedia("(pointer: fine)").matches &&
+        document.documentElement.clientWidth >= pageSizes.mobileWidth &&
         document.documentElement.clientHeight >= pageSizes.mobileHeight
       ) {
         this.onMouseOut(event);
@@ -69,15 +69,10 @@ export class ScrollIndicator {
     this.navigationList?.addEventListener("click", (event) => {
       this.onClick(event);
     });
-    window.addEventListener("scroll", () => {
-      if (scrollY === 0) {
-        this.updateActiveElement(this.indicatorLinks[0]);
-      }
-    });
     this.initObserver();
   }
 
-  updateActiveElement(activeLink: HTMLElement) {
+  updateActiveElement(activeLink: HTMLElement): void {
     if (!this.indicatorLinks) return;
 
     this.indicatorLinks.forEach((link) => {
@@ -125,7 +120,7 @@ export class ScrollIndicator {
     }, 200);
   }
 
-  onClick(event: PointerEvent) {
+  onClick(event: PointerEvent): void {
     if (!this.indicatorLinks) return;
     const target = event.target as HTMLElement;
 
@@ -144,7 +139,7 @@ export class ScrollIndicator {
     }
   }
 
-  initObserver() {
+  initObserver(): void {
     this.sections.forEach((section, index) => {
       const link = this.indicatorLinks[index];
       if (section && link) {
