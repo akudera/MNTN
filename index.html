@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/logo/M.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MNTN | Hiking guide</title>
+    <meta
+      name="description"
+      content="This is an layout for the landing page about hiking designed by Kryston Schwarze."
+    />
+    <meta name="keywords" content="hiking, mntn, mountain" />
+    <meta property="og:title" content="MNTN | Hiking guide" />
+    <meta
+      property="og:description"
+      content="This is an layout for the landing page about hiking designed by Kryston Schwarze."
+    />
+    <meta property="og:image" content="https://mntn-hike.vercel.app/icons/OpenGraph-image.svg" />
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
@@ -12,7 +23,8 @@
       <aside class="follow-us">
         <span class="follow-us__title">Follow us</span>
         <nav class="follow-us__socials">
-          <a href="/" target="_blank" class="follow-us__link" aria-label="instagram">
+          <a href="/" target="_blank" class="follow-us__link" aria-label="Instagram">
+            <span class="visually-hidden">Instagram</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -27,6 +39,7 @@
             </svg>
           </a>
           <a href="/" target="_blank" class="follow-us__link" aria-label="twitter">
+            <span class="visually-hidden">Twitter</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -63,7 +76,7 @@
           aria-label="Закрыть меню"
           title="Закрыть меню"
         >
-          <span class="visually-hidden">Закрыть меню</span>
+          <span class="visually-hidden">Close the menu</span>
           <span></span>
           <span></span>
           <span></span>
@@ -108,7 +121,7 @@
         aria-label="Открыть меню"
         title="Открыть меню"
       >
-        <span class="visually-hidden">Открыть меню</span>
+        <span class="visually-hidden">Open the menu</span>
         <span></span>
         <span></span>
         <span></span>
@@ -117,7 +130,7 @@
     <main class="main">
       <section class="hero" id="hero">
         <div class="hero__background">
-          <picture class="hero__image" data-scroll-speed="0.5">
+          <picture class="hero__image" data-js-scroll-speed="0.5">
             <source
               media="(max-width: 960px)"
               srcset="images/mobile/avif/HG.avif"
@@ -132,7 +145,7 @@
             <source srcset="images/desktop/webp/HG.webp" type="image/webp" />
             <img src="images/desktop/HG.png" alt="" />
           </picture>
-          <picture class="hero__image" data-scroll-speed="0.6">
+          <picture class="hero__image" data-js-scroll-speed="0.6">
             <source
               media="(max-width: 960px)"
               srcset="images/mobile/avif/MG.avif"
@@ -147,7 +160,7 @@
             <source srcset="images/desktop/webp/MG.webp" type="image/webp" />
             <img src="/images/desktop/MG.png" alt="" />
           </picture>
-          <picture class="hero__image" data-scroll-speed="0.7">
+          <picture class="hero__image" data-js-scroll-speed="0.7">
             <source
               media="(max-width: 960px)"
               srcset="images/mobile/avif/VG.avif"
@@ -167,7 +180,7 @@
           <header class="hero__header">
             <span class="hero__subtitle subtitle">A Hiking guide</span>
             <h1 class="hero__title title">Be Prepared For The Mountains And Beyond!</h1>
-            <a class="hero__anchor" href="#01">
+            <a class="hero__anchor" href="#section-01">
               scroll down
               <svg
                 width="16"
@@ -198,7 +211,11 @@
             ratings set by various websites like All Trails and Modern Hiker. What type of hiker are
             you – novice, moderate, advanced moderate, expert, or expert backpacker?
           </div>
-          <a href="/" class="hiker-level__button link">
+          <a
+            href="/"
+            class="hiker-level__button link"
+            aria-label="Read more about determining your hiking level"
+          >
             read more
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +239,7 @@
             alt="Trained man in the mountains"
             width="566"
             height="720"
+            loading="lazy"
           />
         </picture>
       </section>
@@ -237,7 +255,11 @@
             typical mistake hiking beginners make is wearing jeans and regular clothes, which will
             get heavy and chafe wif they get sweaty or wet.
           </div>
-          <a href="/" class="hiking-essentials__button link">
+          <a
+            href="/"
+            class="hiking-essentials__button link"
+            aria-label="Read more about right hiking gear"
+          >
             read more
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -261,6 +283,7 @@
             alt="View from mountain peak"
             width="566"
             height="720"
+            loading="lazy"
           />
         </picture>
       </section>
@@ -276,7 +299,11 @@
             to know what my next landmark is as I hike. For example, I’ll read the guide and know
             that say, in a mile, I make a right turn at the junction..
           </div>
-          <a href="/" class="understanding-map__button link">
+          <a
+            href="/"
+            class="understanding-map__button link"
+            aria-label="Read more about understanding your map"
+          >
             read more
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -300,6 +327,7 @@
             alt="Man holding compass in the mountains"
             width="566"
             height="720"
+            loading="lazy"
           />
         </picture>
       </section>

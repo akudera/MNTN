@@ -7,15 +7,13 @@ export class HeroParallax {
 
   selectors = {
     hero: "hero",
-    scrollSpeed: "[data-scroll-speed]",
+    scrollSpeed: "[data-js-scroll-speed]",
   };
 
   constructor() {
     this.hero = document.getElementById(this.selectors.hero) as HTMLElement;
     this.isTicking = false;
-    this.layers = this.hero
-      ? this.hero.querySelectorAll<HTMLElement>(this.selectors.scrollSpeed)
-      : new (NodeList as any)();
+    this.layers = this.hero.querySelectorAll<HTMLElement>(this.selectors.scrollSpeed);
 
     this.bindEvents();
   }
@@ -36,7 +34,7 @@ export class HeroParallax {
     if (!this.hero || window.scrollY >= this.hero.offsetHeight) return;
 
     this.layers.forEach((el) => {
-      const speed = parseFloat(el.dataset.scrollSpeed || "1");
+      const speed = parseFloat(el.dataset.jsScrollSpeed || "1");
 
       el.style.translate = `0 ${scrollY * speed}px`;
     });
