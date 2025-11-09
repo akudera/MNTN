@@ -18,7 +18,7 @@ export class ScrollIndicator {
   selectors = {
     indicator: "scroll-indicator",
     indicatorLink: "data-js-indicator-link",
-    navigation: "nav-link",
+    navigation: "nav-list",
     hero: "hero",
     firstSectionObserve: "section-01-observe",
     secondSection: "section-02",
@@ -32,8 +32,9 @@ export class ScrollIndicator {
   constructor() {
     this.scrollIndicator = document.getElementById(this.selectors.indicator);
     this.navigationList = document.getElementById(this.selectors.navigation);
-    this.indicatorLinks =
-      Array.from(this.navigationList?.children as HTMLCollectionOf<HTMLElement>) || [];
+    this.indicatorLinks = Array.from<HTMLElement>(
+      this.navigationList?.querySelectorAll(`[${this.selectors.indicatorLink}]`) || []
+    );
 
     this.sections = [
       document.getElementById(this.selectors.hero),
@@ -88,7 +89,7 @@ export class ScrollIndicator {
     if (this.isScrollWatchingBlocked || !this.indicatorLinks || !this.navigationList) return;
 
     const target = event.target as HTMLElement;
-    if (target === this.navigationList || !this.navigationList.contains(target)) return;
+    if (!target.matches(`[${this.selectors.indicatorLink}]`)) return;
     if (this.animationTimer) {
       clearTimeout(this.animationTimer);
       this.animationTimer = null;
@@ -103,7 +104,7 @@ export class ScrollIndicator {
     if (this.isScrollWatchingBlocked || !this.indicatorLinks || !this.navigationList) return;
 
     const target = event.target as HTMLElement;
-    if (target === this.navigationList || !this.navigationList.contains(target)) return;
+    if (!target.matches(`[${this.selectors.indicatorLink}]`)) return;
 
     const activeElement = this.navigationList.querySelector<HTMLElement>(
       `.${this.stateClasses.isActive}`
@@ -124,18 +125,19 @@ export class ScrollIndicator {
     if (!this.indicatorLinks) return;
     const target = event.target as HTMLElement;
 
-    if (target !== this.navigationList && this.navigationList?.contains(target)) {
-      this.isScrollWatchingBlocked = true;
+    if (target.matches(`[${this.selectors.indicatorLink}]`)) {
+      if (!target.matches(`.${this.stateClasses.isActive}`)) {
+        this.isScrollWatchingBlocked = true;
+        window.addEventListener(
+          "scrollend",
+          () => {
+            this.isScrollWatchingBlocked = false;
+          },
+          { once: true }
+        );
+      }
       this.updateActiveElement(target);
       this.updateIndicatorPosition(Array.from(this.indicatorLinks).indexOf(target));
-
-      window.addEventListener(
-        "scrollend",
-        () => {
-          this.isScrollWatchingBlocked = false;
-        },
-        { once: true }
-      );
     }
   }
 
