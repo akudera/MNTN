@@ -20,10 +20,10 @@
   </head>
   <body>
     <div class="fixed-element-wrapper">
-      <aside class="follow-us">
+      <aside class="follow-us" aria-label="Links to socials">
         <span class="follow-us__title">Follow us</span>
-        <nav class="follow-us__socials">
-          <a href="/" target="_blank" class="follow-us__link" aria-label="Instagram">
+        <nav class="follow-us__socials" aria-label="Socials navigation">
+          <a href="/" target="_blank" rel="noopener noreferrer" class="follow-us__link">
             <span class="visually-hidden">Instagram</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
               />
             </svg>
           </a>
-          <a href="/" target="_blank" class="follow-us__link" aria-label="twitter">
+          <a href="/" target="_blank" rel="noopener noreferrer" class="follow-us__link">
             <span class="visually-hidden">Twitter</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@
       <div class="scroll-indicator">
         <nav class="scroll-indicator__nav" aria-label="Navigation through sections">
           <ol class="scroll-indicator__list" id="nav-list">
-            <li class="scroll-indicatro__item">
+            <li class="scroll-indicator__item">
               <a
                 href="#"
                 class="scroll-indicator__link"
@@ -68,7 +68,7 @@
                 >Start</a
               >
             </li>
-            <li class="scroll-indicatro__item">
+            <li class="scroll-indicator__item">
               <a
                 href="#section-01"
                 class="scroll-indicator__link"
@@ -77,7 +77,7 @@
                 >01</a
               >
             </li>
-            <li class="scroll-indicatro__item">
+            <li class="scroll-indicator__item">
               <a
                 href="#section-02"
                 class="scroll-indicator__link"
@@ -86,7 +86,7 @@
                 >02</a
               >
             </li>
-            <li class="scroll-indicatro__item">
+            <li class="scroll-indicator__item">
               <a
                 href="#section-03"
                 class="scroll-indicator__link"
@@ -120,7 +120,7 @@
           <a href="#" class="header__link">About us</a>
           <a href="#" class="header__link">Blog</a>
         </nav>
-        <button type="button" class="header__account">
+        <a href="/" class="header__account">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
             <path
               fill="#fff"
@@ -146,7 +146,7 @@
             </mask>
           </svg>
           Account
-        </button>
+        </a>
       </dialog>
       <button
         type="button"
