@@ -155,8 +155,8 @@
   }
 
   &__account {
-    @include button-normalize;
     @include fluid-text(14, 17);
+    text-decoration: none;
     color: var(--color-text);
     font-family: "Gilroy", sans-serif;
     font-weight: 700;

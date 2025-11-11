@@ -9,7 +9,6 @@
       name="description"
       content="This is an layout for the landing page about hiking designed by Kryston Schwarze."
     />
-    <meta name="keywords" content="hiking, mntn, mountain" />
     <meta property="og:title" content="MNTN | Hiking guide" />
     <meta
       property="og:description"
@@ -20,10 +19,10 @@
   </head>
   <body>
     <div class="fixed-element-wrapper">
-      <aside class="follow-us">
+      <aside class="follow-us" aria-label="Links to socials">
         <span class="follow-us__title">Follow us</span>
-        <nav class="follow-us__socials">
-          <a href="/" target="_blank" class="follow-us__link" aria-label="Instagram">
+        <nav class="follow-us__socials" aria-label="Socials navigation">
+          <a href="/" target="_blank" rel="noopener noreferrer" class="follow-us__link">
             <span class="visually-hidden">Instagram</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +37,7 @@
               />
             </svg>
           </a>
-          <a href="/" target="_blank" class="follow-us__link" aria-label="twitter">
+          <a href="/" target="_blank" rel="noopener noreferrer" class="follow-us__link">
             <span class="visually-hidden">Twitter</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,11 +56,45 @@
         </nav>
       </aside>
       <div class="scroll-indicator">
-        <nav class="scroll-indicator__nav" id="nav-link">
-          <a href="#" class="scroll-indicator__link" data-js-indicator-link>Start</a>
-          <a href="#section-01" class="scroll-indicator__link" data-js-indicator-link>01</a>
-          <a href="#section-02" class="scroll-indicator__link" data-js-indicator-link>02</a>
-          <a href="#section-03" class="scroll-indicator__link" data-js-indicator-link>03</a>
+        <nav class="scroll-indicator__nav" aria-label="Navigation through sections">
+          <ol class="scroll-indicator__list" id="nav-list">
+            <li class="scroll-indicator__item">
+              <a
+                href="#"
+                class="scroll-indicator__link"
+                aria-label="hero section"
+                data-js-indicator-link
+                >Start</a
+              >
+            </li>
+            <li class="scroll-indicator__item">
+              <a
+                href="#section-01"
+                class="scroll-indicator__link"
+                aria-label="first section"
+                data-js-indicator-link
+                >01</a
+              >
+            </li>
+            <li class="scroll-indicator__item">
+              <a
+                href="#section-02"
+                class="scroll-indicator__link"
+                aria-label="second section"
+                data-js-indicator-link
+                >02</a
+              >
+            </li>
+            <li class="scroll-indicator__item">
+              <a
+                href="#section-03"
+                class="scroll-indicator__link"
+                aria-label="third section"
+                data-js-indicator-link
+                >03</a
+              >
+            </li>
+          </ol>
         </nav>
         <div class="scroll-indicator__highlight" id="scroll-indicator"></div>
       </div>
@@ -80,7 +113,7 @@
           <a href="#" class="header__link">About us</a>
           <a href="#" class="header__link">Blog</a>
         </nav>
-        <button type="button" class="header__account">
+        <a href="/" class="header__account">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
             <path
               fill="#fff"
@@ -106,7 +139,7 @@
             </mask>
           </svg>
           Account
-        </button>
+        </a>
       </div>
       <button
         type="button"
@@ -196,15 +229,15 @@
         <div class="hiker-level__observe" id="section-01-observe"></div>
         <div class="hiker-level__content content">
           <header class="hiker-level__header section-header" data-section-number="01">
-            <span class="hiker-level__subtitle subtitle">Get started</span>
+            <p class="hiker-level__subtitle subtitle">Get started</p>
             <h2 class="hiker-level__title title">What level of hiker are you?</h2>
           </header>
-          <div class="hiker-level__description description">
+          <p class="hiker-level__description description">
             Determining what level of hiker you are can be an important tool when planning future
             hikes. This hiking level guide will help you plan hikes according to different hike
             ratings set by various websites like All Trails and Modern Hiker. What type of hiker are
             you – novice, moderate, advanced moderate, expert, or expert backpacker?
-          </div>
+          </p>
           <a
             href="/"
             class="hiker-level__button link"
@@ -240,15 +273,15 @@
       <section class="hiking-essentials container" id="section-02">
         <div class="hiking-essentials__content content">
           <header class="hiking-essentials__header section-header" data-section-number="02">
-            <span class="hiking-essentials__subtitle subtitle">Hiking Essentials</span>
+            <p class="hiking-essentials__subtitle subtitle">Hiking Essentials</p>
             <h2 class="hiking-essentials__title title">Picking the right Hiking Gear!</h2>
           </header>
-          <div class="hiking-essentials__description description">
+          <p class="hiking-essentials__description description">
             The nice thing about beginning hiking is that you don’t really need any special gear,
             you can probably get away with things you already have. Let’s start with clothing. A
             typical mistake hiking beginners make is wearing jeans and regular clothes, which will
             get heavy and chafe wif they get sweaty or wet.
-          </div>
+          </p>
           <a
             href="/"
             class="hiking-essentials__button link"
@@ -284,15 +317,15 @@
       <section class="understanding-map container" id="section-03">
         <div class="understanding-map__content content">
           <header class="understanding-map__header section-header" data-section-number="03">
-            <span class="understanding-map__subtitle subtitle">Where you go is the key</span>
+            <p class="understanding-map__subtitle subtitle">Where you go is the key</p>
             <h2 class="understanding-map__title title">Understand Your Map & Timing</h2>
           </header>
-          <div class="understanding-map__description description">
+          <p class="understanding-map__description description">
             To start, print out the hiking guide and map. If it’s raining, throw them in a Zip-Lock
             bag. Read over the guide, study the map, and have a good idea of what to expect. I like
             to know what my next landmark is as I hike. For example, I’ll read the guide and know
             that say, in a mile, I make a right turn at the junction..
-          </div>
+          </p>
           <a
             href="/"
             class="understanding-map__button link"
