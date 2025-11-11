@@ -4,6 +4,8 @@ export class Menu {
   header: HTMLElement | null;
   handleMenuButton: HTMLButtonElement | null;
   menuDialog: HTMLElement | null;
+  main: HTMLElement | null;
+  footer: HTMLElement | null;
 
   duration: number;
   isOpen: boolean;
@@ -15,6 +17,8 @@ export class Menu {
     closeMenuButton: "close-menu-button",
     header: "header",
     menu: "menu",
+    main: "main",
+    footer: "footer",
   } as const;
 
   stateClasses = {
@@ -35,6 +39,8 @@ export class Menu {
     this.header = document.getElementById(this.selectors.header) as HTMLElement;
     this.handleMenuButton = document.getElementById(this.selectors.menuButton) as HTMLButtonElement;
     this.menuDialog = document.getElementById(this.selectors.menu);
+    this.main = document.getElementById(this.selectors.main);
+    this.footer = document.getElementById(this.selectors.footer);
     this.isOpen = false;
     this.isAnimating = false;
 
@@ -73,7 +79,7 @@ export class Menu {
     } else {
       this.menuDialog.classList.remove(this.stateClasses.isOpen);
     }
-    this.menuDialog.ariaHidden = `${isOpen}`;
+    this.menuDialog.ariaHidden = `${!isOpen}`;
   }
 
   handleButtonStates(isCloseMode: boolean) {
@@ -102,6 +108,8 @@ export class Menu {
     this.isOpen = true;
     this.handleMenuStates(true);
     this.handleButtonStates(true);
+    this.main?.setAttribute("inert", "");
+    this.footer?.setAttribute("inert", "");
 
     this.menuDialog?.addEventListener(
       "transitionend",
@@ -126,6 +134,8 @@ export class Menu {
     this.isAnimating = true;
     this.menuDialog?.classList.add(this.stateClasses.fadeOut);
     this.menuDialog?.classList.remove(this.stateClasses.fadeIn);
+    this.main?.removeAttribute("inert");
+    this.footer?.removeAttribute("inert");
 
     document.documentElement.classList.remove(this.stateClasses.isLocked);
     this.handleButtonStates(false);
