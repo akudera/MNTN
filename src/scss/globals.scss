@@ -5,3 +5,10 @@ html {
 body {
   background-color: var(--color-root);
 }
+
+:focus-visible {
+  outline-width: 3px;
+  outline-color: var(--color-text-accent);
+  outline-offset: 5px;
+  outline-style: dashed;
+}

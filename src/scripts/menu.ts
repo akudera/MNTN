@@ -1,5 +1,3 @@
-import { debounce, pageSizes } from "./utils";
-
 export class Menu {
   header: HTMLElement | null;
   handleMenuButton: HTMLButtonElement | null;
@@ -7,6 +5,7 @@ export class Menu {
   main: HTMLElement | null;
   footer: HTMLElement | null;
 
+  mediaQueryList: MediaQueryList;
   duration: number;
   isOpen: boolean;
   isAnimating: boolean;
@@ -31,8 +30,8 @@ export class Menu {
   } as const;
 
   buttonModes = {
-    close: "Close the menu",
-    open: "Open the menu",
+    close: "Close navigation menu",
+    open: "Open navigation menu",
   } as const;
 
   constructor() {
@@ -49,6 +48,8 @@ export class Menu {
         getComputedStyle(document.documentElement).getPropertyValue("--transition-duration")
       ) * 1000;
 
+    this.mediaQueryList = window.matchMedia("(max-width: 620px)");
+    this.onResize(this.mediaQueryList);
     this.bindEvents();
   }
 
@@ -63,12 +64,9 @@ export class Menu {
     document.documentElement?.addEventListener("keydown", (event) => {
       this.keyboardHandler(event);
     });
-    window.addEventListener(
-      "resize",
-      debounce(() => {
-        this.onResize();
-      }, 100)
-    );
+    this.mediaQueryList.addEventListener("change", (event) => {
+      this.onResize(event);
+    });
   }
 
   handleMenuStates(isOpen: boolean): void {
@@ -76,8 +74,10 @@ export class Menu {
 
     if (isOpen) {
       this.menuDialog.classList.add(this.stateClasses.isOpen);
+      this.menuDialog.ariaModal = "true";
     } else {
       this.menuDialog.classList.remove(this.stateClasses.isOpen);
+      this.menuDialog.ariaModal = "false";
     }
     this.menuDialog.ariaHidden = `${!isOpen}`;
   }
@@ -127,7 +127,7 @@ export class Menu {
     });
   }
 
-  closeMenu(): void {
+  closeMenu(closeImmediately?: boolean): void {
     if (!this.isOpen || this.isAnimating) return;
 
     this.isOpen = false;
@@ -139,11 +139,16 @@ export class Menu {
 
     document.documentElement.classList.remove(this.stateClasses.isLocked);
     this.handleButtonStates(false);
-    setTimeout(() => {
+    const closeAnimationHandle = () => {
       this.handleMenuStates(false);
       this.menuDialog?.classList.remove(this.stateClasses.fadeOut);
       this.isAnimating = false;
-    }, this.duration);
+    };
+    if (closeImmediately) {
+      closeAnimationHandle();
+    } else {
+      setTimeout(closeAnimationHandle, this.duration);
+    }
   }
 
   keyboardHandler(event: KeyboardEvent): void {
@@ -153,9 +158,18 @@ export class Menu {
     }
   }
 
-  onResize(): void {
-    if (this.isOpen && document.documentElement.clientWidth >= pageSizes.mobileWidth) {
-      this.closeMenu();
+  onResize(event: MediaQueryListEvent | MediaQueryList): void {
+    if (event.matches) {
+      this.menuDialog?.setAttribute("role", "dialog");
+      this.menuDialog?.setAttribute("aria-modal", this.isOpen ? "true" : "false");
+      this.menuDialog?.setAttribute("aria-hidden", this.isOpen ? "false" : "true");
+    } else {
+      if (this.isOpen) {
+        this.closeMenu(true);
+      }
+      this.menuDialog?.removeAttribute("role");
+      this.menuDialog?.removeAttribute("aria-modal");
+      this.menuDialog?.removeAttribute("aria-hidden");
     }
   }
 }
