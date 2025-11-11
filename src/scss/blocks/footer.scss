@@ -20,7 +20,7 @@
     }
 
     &-logo {
-      display: inline;
+      width: min-content;
     }
 
     &-description {
@@ -71,19 +71,20 @@
     &-list {
       display: flex;
       flex-direction: column;
-      row-gap: 16px;
+      row-gap: 6px;
     }
 
     &-item {
       & a {
         @include fluid-text(14, 18);
-        display: inline-flex;
-        width: fit-content;
+        display: block;
+        width: 100%;
         font-family: "Gilroy", sans-serif;
         font-weight: 500;
         color: var(--color-text);
         text-decoration: none;
         transition: color var(--transition-duration);
+        padding-block: 5px;
 
         @include hover {
           color: var(--color-text-accent);
