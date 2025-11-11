@@ -8,7 +8,7 @@ export class HeroParallax {
   selectors = {
     hero: "hero",
     scrollSpeed: "[data-js-scroll-speed]",
-  };
+  } as const;
 
   constructor() {
     this.hero = document.getElementById(this.selectors.hero) as HTMLElement;

@@ -68,19 +68,7 @@
     </div>
     <header class="header" id="header">
       <a href="/" class="header__logo">MNTN</a>
-      <dialog class="header__menu" id="menu">
-        <button
-          type="button"
-          class="header__menu-button close"
-          id="close-menu-button"
-          aria-label="Close the menu"
-          title="Close the menu"
-        >
-          <span class="visually-hidden">Close the menu</span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+      <div class="header__menu" id="menu" role="dialog" aria-modal="true">
         <nav class="header__nav">
           <a href="#" class="header__link">Equipment</a>
           <a href="#" class="header__link">About us</a>
@@ -113,11 +101,11 @@
           </svg>
           Account
         </button>
-      </dialog>
+      </div>
       <button
         type="button"
         class="header__menu-button"
-        id="open-menu-button"
+        id="menu-button"
         aria-label="Open the menu"
         title="Open the menu"
       >

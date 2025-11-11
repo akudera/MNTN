@@ -8,12 +8,20 @@
   opacity: 0 !important;
 }
 
+.is-modal-open {
+  display: flex !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .header {
   --header-padding: 20px;
+  --header-transform-top: 64px;
 
   position: absolute;
   justify-self: center;
-  top: 0;
+  top: var(--header-transform-top);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,15 +29,21 @@
   max-width: 1920px;
   width: 100%;
   padding-inline: 80px;
-  transform: translateY(64px);
-  transition: backdrop-filter var(--transition-duration);
   z-index: 1000;
 
   &.fixed {
+    --header-transform-top: 0px;
     position: fixed;
-    transform: translateY(0px);
+    top: var(--header-transform-top);
     padding-block: var(--header-padding);
-    backdrop-filter: blur(12px);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(12px);
+      z-index: -1;
+    }
   }
 
   &__logo {
@@ -39,6 +53,7 @@
     text-decoration: none;
     color: var(--color-text);
     transition: color var(--transition-duration);
+    z-index: 200;
 
     @include hover {
       color: var(--color-text-hover);
@@ -59,10 +74,6 @@
     z-index: 100;
     transition: opacity var(--transition-duration);
 
-    &::backdrop {
-      display: none;
-    }
-
     &-button {
       position: relative;
       display: none;
@@ -81,33 +92,28 @@
         }
       }
 
+      &.close-mode {
+        & span:nth-child(2) {
+          transform: translate(6.5px, 5px);
+          rotate: 45deg;
+        }
+
+        & span:nth-child(3) {
+          width: 0;
+        }
+
+        & span:nth-child(4) {
+          transform: translate(7.5px, -6px);
+          rotate: -45deg;
+        }
+      }
+
       & span {
         width: 100%;
         height: 2px;
         background-color: var(--color-text);
-        transition: background-color var(--transition-duration);
-      }
-
-      &.close {
-        position: absolute;
-        top: 40px;
-        right: 40px;
-
-        & {
-          & span:nth-child(2) {
-            transform: translate(6.5px, 5px);
-            rotate: 45deg;
-          }
-
-          & span:nth-child(3) {
-            width: 0;
-          }
-
-          & span:nth-child(4) {
-            transform: translate(7.5px, -6px);
-            rotate: -45deg;
-          }
-        }
+        transition-property: background-color, transform, rotate, width;
+        transition-duration: var(--transition-duration);
       }
     }
   }
@@ -174,14 +180,14 @@
     padding-inline: 40px;
 
     &__menu {
-      display: flex;
+      display: none;
       flex-direction: column;
       row-gap: 40px;
       justify-content: space-between;
       align-items: center;
       opacity: 0;
 
-      &:not([open]) {
+      &:not(.is-modal-open) {
         display: none;
       }
 
