@@ -46,20 +46,6 @@
     }
   }
 
-  &__logo {
-    @include fluid-text(26, 32);
-    font-family: "ChronicleDisplay", serif;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--color-text);
-    transition: color var(--transition-duration);
-    z-index: 200;
-
-    @include hover {
-      color: var(--color-text-hover);
-    }
-  }
-
   &__menu {
     display: contents;
     width: 100vw;

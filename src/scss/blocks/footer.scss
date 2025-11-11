@@ -1,0 +1,124 @@
+@use "../mixins.scss" as *;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 200px 120px;
+
+  &__extra {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 50px;
+    height: 100%;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      row-gap: 24px;
+      max-width: 350px;
+    }
+
+    &-logo {
+      display: inline;
+    }
+
+    &-description {
+      @include fluid-text(14, 18);
+      font-family: "Gilroy", sans-serif;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    &-copyright {
+      @include fluid-text(14, 18);
+      font-family: "Gilroy", sans-serif;
+      font-weight: 500;
+      color: var(--color-text);
+      opacity: 0.7;
+
+      & a {
+        color: inherit;
+        transition: color var(--transition-duration);
+
+        @include hover {
+          color: var(--color-text-accent);
+        }
+      }
+    }
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px 212px;
+
+    &-links {
+      max-width: 200px;
+    }
+
+    &-title {
+      @include fluid-text(20, 24);
+      font-family: "Gilroy", sans-serif;
+      font-weight: 700;
+      color: var(--color-text-accent);
+
+      &:not(:last-child) {
+        margin-bottom: 24px;
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 16px;
+    }
+
+    &-item {
+      & a {
+        @include fluid-text(14, 18);
+        display: inline-flex;
+        width: fit-content;
+        font-family: "Gilroy", sans-serif;
+        font-weight: 500;
+        color: var(--color-text);
+        text-decoration: none;
+        transition: color var(--transition-duration);
+
+        @include hover {
+          color: var(--color-text-accent);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1160px) {
+  .container.footer {
+    flex-direction: column-reverse;
+  }
+
+  .footer__extra-info {
+    max-width: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .footer {
+    padding-block: 100px 80px;
+
+    &__main {
+      column-gap: 100px;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .footer {
+    align-items: flex-start;
+
+    &__main {
+      flex-direction: column;
+    }
+  }
+}
