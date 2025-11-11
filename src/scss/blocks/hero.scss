@@ -11,7 +11,7 @@
     justify-content: center;
     overflow: hidden;
     height: 140lvh;
-    max-height: 1400px;
+    max-height: 900px;
     position: relative;
     z-index: -100;
 
@@ -73,6 +73,10 @@
     color: var(--color-text);
   }
 
+  &__title {
+    @include fluid-text(44, 88);
+  }
+
   &__anchor {
     @include fluid-text(14, 18);
     color: var(--color-text);
@@ -95,13 +99,6 @@
         transform: translateY(12%);
       }
     }
-  }
-}
-
-@media (max-width: 1244px) {
-  .hero__image {
-    max-width: none;
-    width: 140%;
   }
 }
 

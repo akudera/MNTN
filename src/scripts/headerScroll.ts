@@ -12,6 +12,7 @@ export class HeaderScroll {
 
   stateClasses = {
     fixed: "fixed",
+    blurred: "blurred",
   };
 
   constructor() {
